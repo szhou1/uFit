@@ -7,7 +7,7 @@ public class Cardio extends Exercise {
 	private String distance;
 	private Time time;
 	public int testInt = 5;
-	
+	//steve
 	public String getDistance() {
 		return distance;
 	}
