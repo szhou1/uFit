@@ -3,7 +3,7 @@ package com.model.exercise;
 import java.sql.Time;
 
 public class Cardio extends Exercise {
-
+// my name is walter
 	private String distance;
 	private Time time;
 	
