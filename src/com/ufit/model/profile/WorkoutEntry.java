@@ -1,9 +1,9 @@
-package com.model.profile;
+package com.ufit.model.profile;
 
 import java.util.Date;
 import java.util.List;
 
-import com.model.exercise.Exercise;
+import com.ufit.model.exercise.Exercise;
 
 public class WorkoutEntry {
 	

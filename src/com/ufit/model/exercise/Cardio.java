@@ -1,4 +1,4 @@
-package com.model.exercise;
+package com.ufit.model.exercise;
 
 import java.sql.Time;
 

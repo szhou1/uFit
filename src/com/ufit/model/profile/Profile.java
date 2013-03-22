@@ -1,4 +1,4 @@
-package com.model.profile;
+package com.ufit.model.profile;
 
 import java.util.List;
 
