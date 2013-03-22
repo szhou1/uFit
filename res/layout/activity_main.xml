@@ -9,8 +9,37 @@
     tools:context=".MainActivity" >
 
     <TextView
+        android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
+    
+    <Button
+        android:id="@+id/progress"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome"
+        android:text="Progress" />
+    
+    <Button
+        android:id="@+id/diet"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/progress"
+        android:text="Diet" />
+    
+    <Button
+        android:id="@+id/routine"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/diet"
+        android:text="Routine" />
+    
+    <Button
+        android:id="@+id/exercises"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/routine"
+        android:text="Exercises" />
 
 </RelativeLayout>
