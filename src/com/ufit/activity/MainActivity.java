@@ -1,4 +1,4 @@
-package com.ufit.activity.ufit;
+package com.ufit.activity;
 
 import java.util.List;
 
@@ -25,18 +25,14 @@ public class MainActivity extends Activity {
 		
 		List<Profile> profiles = datasource.getAllProfiles();
 		
+		
+//		Profile profile2 = datasource.createProfile("walterito", "ilovepupusas");
+//		Profile profile = datasource.createProfile("szhou", "mypassword1123");
 		for(Profile p : profiles){
 			Log.d(Constants.TAG, "Login: " + p.getUserLogin());
 			Log.d(Constants.TAG, "Password: " + p.getPassword());
 		}
-		
-		Profile profile2 = datasource.createProfile("walterito", "ilovepupusas");
-		Profile profile = datasource.createProfile("szhou", "mypassword1123");
 
-		Log.d("ufit", "Login: " + profile.getUserLogin());
-		Log.d("ufit", "Password: " + profile.getPassword());
-		Log.d("ufit", "Login: " + profile2.getUserLogin());
-		Log.d("ufit", "Password: " + profile2.getPassword());
 	}
 
 	@Override
