@@ -25,10 +25,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Log.i(Constants.TAG, "Starting MainActivity");
+
 		addListenerOnProgressButton();
 		addListenerOnDietButton();
 		
-		Log.i(Constants.TAG, "Starting MainActivity");
 		ProfileDataSource datasource = new ProfileDataSource(this);
 		datasource.open();
 		
