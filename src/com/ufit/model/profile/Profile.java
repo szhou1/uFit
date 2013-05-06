@@ -33,5 +33,8 @@ public class Profile {
 	public void setEntries(List<WorkoutEntry> entries) {
 		this.entries = entries;
 	}
+	public String toString(){
+		return this.userLogin;
+	}
 	
 }

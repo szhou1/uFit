@@ -18,4 +18,10 @@ public class Exercise {
 		this.muscleGroup = muscleGroup;
 	}
 	
+	public String toString(){
+		String s = name + " : " + muscleGroup;
+		
+		return s;
+		
+	}
 }

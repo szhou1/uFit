@@ -14,8 +14,6 @@ import android.widget.Button;
 
 import com.ufit.R;
 import com.ufit.contants.Constants;
-import com.ufit.dao.profile.ProfileDataSource;
-import com.ufit.model.profile.Profile;
 
 public class MainActivity extends Activity {
 
@@ -30,18 +28,7 @@ public class MainActivity extends Activity {
 		addListenerOnProgressButton();
 		addListenerOnDietButton();
 		
-		ProfileDataSource datasource = new ProfileDataSource(this);
-		datasource.open();
 		
-		List<Profile> profiles = datasource.getAllProfiles();
-		
-		
-//		Profile profile2 = datasource.createProfile("walterito", "ilovepupusas");
-//		Profile profile = datasource.createProfile("szhou", "mypassword1123");
-		for(Profile p : profiles){
-			Log.d(Constants.TAG, "Login: " + p.getUserLogin());
-			Log.d(Constants.TAG, "Password: " + p.getPassword());
-		}
 
 	}
 	

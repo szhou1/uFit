@@ -3,7 +3,8 @@ package com.ufit.dao.profile;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ufit.model.database.CreateProfileDatabase;
+import com.ufit.contants.Constants;
+import com.ufit.model.database.ProfileDatabase;
 import com.ufit.model.profile.Profile;
 
 import android.content.ContentValues;
@@ -11,16 +12,17 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class ProfileDataSource {
 
 	private SQLiteDatabase database;
-	private CreateProfileDatabase dbHelper;
-	private String[] allColumns = { CreateProfileDatabase.COLUMN_LOGIN,
-			CreateProfileDatabase.COLUMN_PASSWORD };
+	private ProfileDatabase dbHelper;
+	private String[] allColumns = { ProfileDatabase.COLUMN_LOGIN,
+			ProfileDatabase.COLUMN_PW };
 
 	public ProfileDataSource(Context context) {
-		dbHelper = new CreateProfileDatabase(context);
+		dbHelper = new ProfileDatabase(context);
 	}
 
 	public void open() throws SQLException {
@@ -33,12 +35,12 @@ public class ProfileDataSource {
 
 	public Profile createProfile(String loginId, String password) {
 		ContentValues values = new ContentValues();
-		values.put(CreateProfileDatabase.COLUMN_LOGIN, loginId);
-		values.put(CreateProfileDatabase.COLUMN_PASSWORD, password);
+		values.put(ProfileDatabase.COLUMN_LOGIN, loginId);
+		values.put(ProfileDatabase.COLUMN_PW, password);
 		// long insertId = database.insert(CreateProfileDatabase.TABLE_PROFILE,
 		// null, values);
-		database.insert(CreateProfileDatabase.TABLE_PROFILE, null, values);
-		Cursor cursor = database.query(CreateProfileDatabase.TABLE_PROFILE,
+		database.insert(ProfileDatabase.TABLE_PROFILE, null, values);
+		Cursor cursor = database.query(ProfileDatabase.TABLE_PROFILE,
 				allColumns, null, null, null, null, null);
 		cursor.moveToFirst();
 		Profile newProfile = cursorToProfile(cursor);
@@ -48,15 +50,15 @@ public class ProfileDataSource {
 
 	public void deleteProfile(Profile profile) {
 		String id = profile.getUserLogin();
-		System.out.println("Profile deleted with id: " + id);
-		database.delete(CreateProfileDatabase.TABLE_PROFILE, CreateProfileDatabase.COLUMN_LOGIN
-				+ " = " + id, null);
+		Log.d(Constants.TAG, "Deleting profile with id: " + id);
+		database.delete(ProfileDatabase.TABLE_PROFILE, ProfileDatabase.COLUMN_LOGIN
+				+ " = '" + id + "'", null);
 	}
 
 	public List<Profile> getAllProfiles() {
 		List<Profile> profiles = new ArrayList<Profile>();
 
-		Cursor cursor = database.query(CreateProfileDatabase.TABLE_PROFILE,
+		Cursor cursor = database.query(ProfileDatabase.TABLE_PROFILE,
 				allColumns, null, null, null, null, null);
 
 		cursor.moveToFirst();
