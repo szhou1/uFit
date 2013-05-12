@@ -6,5 +6,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_diet">DietActivity</string>
     <string name="title_activity_progress">ProgressActivity</string>
-
+    <string name="progress_delete_first">Delete First</string>
+    <string name="progress_add_entry">Add Entry</string>
+    <string name="progress_delete_all">Delete All</string>
+    <string name="delete_entry_prompt">Delete</string>
+    <string name="copy_entry_prompt">Copy</string>
+    <string name="workout_entry">Workout Entry</string>
+    
 </resources>

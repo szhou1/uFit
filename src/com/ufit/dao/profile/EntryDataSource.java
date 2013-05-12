@@ -41,25 +41,26 @@ public class EntryDataSource {
 		dbHelper.close();
 	}
 
-	public WorkoutEntry createEntry(String id, String ts, String exercise, String desc) {
+	public WorkoutEntry createEntry(String ts, String exercise, String desc) {
 		ContentValues values = new ContentValues();
-		values.put(EntryDatabase.COLUMN_ID, id);
-		values.put(EntryDatabase.COLUMN_TS, ts.toString());
+//		values.put(EntryDatabase.COLUMN_ID, id);
+		values.put(EntryDatabase.COLUMN_TS, ts);
 		values.put(EntryDatabase.COLUMN_EXERCISE, exercise);
 		values.put(EntryDatabase.COLUMN_DESCRIPTION, desc);
-		
+
 		database.insert(EntryDatabase.TABLE_ENTRY, null, values);
 		Cursor cursor = database.query(EntryDatabase.TABLE_ENTRY,
 				allColumns, null, null, null, null, null);
-		cursor.moveToFirst();
+		cursor.moveToLast();
 		WorkoutEntry newEntry = cursorToEntry(cursor);
 		cursor.close();
+		Log.d(Constants.TAG, "new entry id: " + newEntry.getId());
+
 		return newEntry;
 	}
 
 	public void deleteEntry(WorkoutEntry entry) {
 		String id = entry.getId();
-		Log.d(Constants.TAG, "Deleting entry with id: " + id);
 		database.delete(EntryDatabase.TABLE_ENTRY, EntryDatabase.COLUMN_ID
 				+ " = '" + id + "'", null);
 	}
@@ -73,12 +74,18 @@ public class EntryDataSource {
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
 			WorkoutEntry entry = cursorToEntry(cursor);
+			Log.d(Constants.TAG, "	getallentries: timestamp: " + entry.getWorkoutTS());
+
 			entries.add(entry);
 			cursor.moveToNext();
 		}
 		// Make sure to close the cursor
 		cursor.close();
 		return entries;
+	}
+	
+	public void findNextId(){
+		
 	}
 
 	
@@ -105,5 +112,10 @@ public class EntryDataSource {
 		entry.setWorkoutTS(date);
 		entry.setDescription(cursor.getString(cursor.getColumnIndex(EntryDatabase.COLUMN_DESCRIPTION)));
 		return entry;
+	}
+
+	public void deleteAllEntries() {
+		Log.d(Constants.TAG, "Deleting all workout entries");
+		database.delete(EntryDatabase.TABLE_ENTRY, null, null);		
 	}
 }

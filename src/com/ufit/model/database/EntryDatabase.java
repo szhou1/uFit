@@ -9,7 +9,7 @@ import android.util.Log;
 public class EntryDatabase extends SQLiteOpenHelper  {
 
 	public static final String TABLE_ENTRY = "entries";
-	public static final String COLUMN_ID = "id";
+	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_TS = "timestamp";
 	public static final String COLUMN_EXERCISE = "exercise";
 	public static final String COLUMN_DESCRIPTION = "description";
@@ -17,7 +17,7 @@ public class EntryDatabase extends SQLiteOpenHelper  {
 	private static final String DATABASE_NAME = "entry.db";
 	private static final int DATABASE_VERSION = 1;
 	private static final String DATABASE_CREATE = "create table "
-			+ TABLE_ENTRY + "(" + COLUMN_ID + " text not null, " + COLUMN_TS + " text not null," + COLUMN_EXERCISE
+			+ TABLE_ENTRY + "(" + COLUMN_ID + " integer primary key autoincrement not null, " + COLUMN_TS + " text not null," + COLUMN_EXERCISE
 			+ " text not null, " + COLUMN_DESCRIPTION + " );";
 
 	
