@@ -50,8 +50,6 @@ public class ProgressActivity extends ListActivity {
 	}
 
 	public void onClick(View view) {
-		@SuppressWarnings("unchecked")
-		ArrayAdapter<WorkoutEntry> adapter = (ArrayAdapter<WorkoutEntry>) getListAdapter();
 		WorkoutEntry entry = null;
 		switch (view.getId()) {
 		case R.id.add:
@@ -65,25 +63,25 @@ public class ProgressActivity extends ListActivity {
 					"135 lb heavy as a muthalove");
 			Log.d(Constants.TAG, "added entry timestamp: id: " + entry.getId() + " : " + timestamp);
 			
-			adapter.add(entry);
+			getAdapter().add(entry);
 
 			break;
 		case R.id.delete:
-			if (getListAdapter().getCount() > 0) {
-				entry = (WorkoutEntry) getListAdapter().getItem(0);
+			if (getAdapter().getCount() > 0) {
+				entry = (WorkoutEntry) getAdapter().getItem(0);
 				Log.d(Constants.TAG, "Deleting entry timestamp: id:" + entry.getId() + ": " + entry.getWorkoutTS());
 				datasource.deleteEntry(entry);
-				adapter.remove(entry);
+				getAdapter().remove(entry);
 			}
 			break;
 		case R.id.delete_all:
-			if (getListAdapter().getCount() > 0) {
+			if (getAdapter().getCount() > 0) {
 				datasource.deleteAllEntries();
-				adapter.clear();
+				getAdapter().clear();
 			}
 			break;
 		}
-		adapter.notifyDataSetChanged();
+		getAdapter().notifyDataSetChanged();
 	}
 
 	@Override
@@ -106,34 +104,41 @@ public class ProgressActivity extends ListActivity {
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-	 String selection = l.getItemAtPosition(position).toString();
-	 
-     final Dialog dialog = new Dialog(this);
+	protected void onListItemClick(ListView l, View v, final int position, long id) {
 
-     dialog.setContentView(R.layout.entry_dialog);
-     dialog.setTitle(R.string.workout_entry);
+		final Dialog dialog = new Dialog(this);
 
-     dialog.show();
+		dialog.setContentView(R.layout.entry_dialog);
+		dialog.setTitle(R.string.workout_entry);
+
+		dialog.show();
+		Log.d(Constants.TAG, "Clicked on entry : " + getAdapter().getItem(position).getId() + " TS: " + getAdapter().getItem(position).getWorkoutTS());
+
+		LinearLayout delete = (LinearLayout) dialog
+				.findViewById(R.id.delete_entry_dialog);
+		delete.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View v) {
+				dialog.dismiss();
+				Log.d(Constants.TAG, "Deleting from adapter: " + getAdapter().getItem(position).toString());
+
+				ArrayAdapter<WorkoutEntry> adapter = (ArrayAdapter<WorkoutEntry>) getAdapter();
+				WorkoutEntry entry = (WorkoutEntry) adapter.getItem(position);
+				adapter.remove(entry);
+				datasource.deleteEntry(entry);
+
+				adapter.notifyDataSetChanged();
+			}
+		});
      
-     LinearLayout delete = (LinearLayout)dialog.findViewById(R.id.delete_entry_dialog);
-     delete.setOnClickListener(new OnClickListener() {
-
-         public void onClick(View v) {
-            dialog.dismiss();
- 			Log.d(Constants.TAG, "clicked delete ");
- 			
- 			WorkoutEntry entry = null;
- 			
- 			
-//			datasource.deleteAllEntries();
-			ArrayAdapter<WorkoutEntry> adapter = (ArrayAdapter<WorkoutEntry>) getListAdapter();
-//			adapter.clear();
-//             
- 			adapter.notifyDataSetChanged();
-         }
-     });
-     
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public ArrayAdapter<WorkoutEntry> getAdapter(){
+		
+		return (ArrayAdapter<WorkoutEntry>) getListAdapter();
+		
 	}
 
 }

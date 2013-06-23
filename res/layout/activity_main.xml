@@ -13,28 +13,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
-    
+
     <Button
         android:id="@+id/progress"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/welcome"
         android:text="Progress" />
-    
+
     <Button
         android:id="@+id/diet"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/progress"
         android:text="Diet" />
-    
+
     <Button
         android:id="@+id/routine"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/diet"
         android:text="Routine" />
-    
+
     <Button
         android:id="@+id/exercises"
         android:layout_width="fill_parent"
@@ -42,4 +42,11 @@
         android:layout_below="@id/routine"
         android:text="Exercises" />
 
+    <Button
+        android:id="@+id/calendar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/exercises"
+        android:text="Calendar" />
+    
 </RelativeLayout>

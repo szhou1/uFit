@@ -60,6 +60,8 @@ public class EntryDataSource {
 	}
 
 	public void deleteEntry(WorkoutEntry entry) {
+		Log.d(Constants.TAG, "deleteEntry: " + entry.getId());
+
 		String id = entry.getId();
 		database.delete(EntryDatabase.TABLE_ENTRY, EntryDatabase.COLUMN_ID
 				+ " = '" + id + "'", null);
@@ -84,8 +86,9 @@ public class EntryDataSource {
 		return entries;
 	}
 	
-	public void findNextId(){
+	public String toString(WorkoutEntry entry){
 		
+		return entry.getId() + " : " + entry.getWorkoutTS();
 	}
 
 	
