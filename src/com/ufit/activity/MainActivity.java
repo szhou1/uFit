@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 
 		addListenerOnProgressButton();
 		addListenerOnDietButton();
-		addListenerOnCalendarButton();//aklsdjflkafjlkfj
+		addListenerOnCalendarButton();
 	}
 
 	public void addListenerOnProgressButton() {
