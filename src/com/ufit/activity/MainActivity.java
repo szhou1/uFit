@@ -32,7 +32,9 @@ public class MainActivity extends Activity {
 	}
 
 	public void addListenerOnProgressButton() {
+		Log.i(Constants.TAG, "addListenerOnProgressButton ");
 		final Context context = this;
+
 		button = (Button) findViewById(R.id.progress);
 		button.setOnClickListener(new OnClickListener() {
 			@Override
